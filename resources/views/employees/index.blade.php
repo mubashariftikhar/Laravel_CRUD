@@ -38,6 +38,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Address</th>
+                        <th>Position</th>
                         <th>Department</th>
 
                         <th width="150">Action</th>
@@ -57,6 +58,8 @@
                             <td>{{ $employee->name }}</td>
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->address }}</td>
+                            <td>{{ $employee->role->position }}
+                            </td>
                             <td>{{ $employee->department->name }}
                             </td>
                             <td>

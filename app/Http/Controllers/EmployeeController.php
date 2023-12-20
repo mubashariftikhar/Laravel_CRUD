@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Employee;
 use Illuminate\Support\Facades\File;
 use App\Models\Department;
+use App\Models\Role;
 
 class EmployeeController extends Controller
 {
@@ -17,8 +18,9 @@ class EmployeeController extends Controller
     }
 
     public function create(){
+          $roles = Role::all();
            $departments = Department::all();
-        return view('employees.create',compact('departments'));
+        return view('employees.create',compact('departments','roles'));
     }
 
     // CONTROLLER FOR SAVE AND RETRIVE DATA
@@ -29,9 +31,11 @@ class EmployeeController extends Controller
             'name'=>'required',
             'email'=>'required',
             'department'=>'required',
+            'role'=>'required',
             'image'=>'sometimes| image: gif,png,jpeg,jpg'
         ]);
          $selectedDepartmentId = $request->input('department');
+             $selectedRoleId = $request->input('role');
 
         if($validator->passes()){
             //Save Data Here
@@ -39,6 +43,7 @@ class EmployeeController extends Controller
             $employee->name=$request->name;
             $employee->email=$request->email;
             $employee->department_id=$request->department;
+               $employee->role_id=$request->role;
              $employee->address=$request->address;
              $employee->save();
 
@@ -63,8 +68,9 @@ class EmployeeController extends Controller
         $employee=Employee::find($id);  
 
     $departments = Department::all(); // Retrieve departments
+     $roles = Role::all(); // Retrieve roles/position
 
-       return view('employees.edit', compact('employee', 'departments'));
+       return view('employees.edit', compact('employee', 'departments','roles'));
 }
       
     
@@ -77,6 +83,7 @@ class EmployeeController extends Controller
             'name'=>'required',
             'email'=>'required',
             'department'=>'required',
+            'role'=>'required',
             'image'=>'sometimes| image: gif,png,jpeg,jpg'
         ]);
 
@@ -86,6 +93,7 @@ class EmployeeController extends Controller
             $employee->name=$request->name;
             $employee->email=$request->email;
              $employee->department_id=$request->department;
+                $employee->role_id=$request->role;
              $employee->address=$request->address;
              $employee->update();
 

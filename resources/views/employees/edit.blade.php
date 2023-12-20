@@ -49,6 +49,23 @@
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Position</label>
+                        <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+                            <option value="">Select Role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role['id'] }}"
+                                    {{ $employee->role_id == $role['id'] ? 'selected' : '' }}>
+                                    {{ $role['position'] }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('department')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="department" class="form-label">Department</label>
                         <select name="department" id="department"

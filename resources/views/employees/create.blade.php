@@ -46,6 +46,20 @@
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="role"class="form-label">Position</label>
+                        <select name="role" id="role"class="form-control @error('role') is-invalid @enderror">
+                            <option value="{{ old('role') }}">Select Role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->position }}</option>
+                            @endforeach
+                            @error('role')
+                                <p class="invalid-feedback">{{ $message }}</p>
+                            @enderror
+                        </select>
+                    </div>
+
                     <div class="mb-3">
                         <label for="department"class="form-label">Department</label>
                         <select name="department"
@@ -58,7 +72,6 @@
                                 <p class="invalid-feedback">{{ $message }}</p>
                             @enderror
                         </select>
-
                     </div>
                     <div class="mb-3">
                         <label for="address"class="form-label">Address</label>
